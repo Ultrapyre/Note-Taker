@@ -10,16 +10,22 @@ notes.get("/", (req, res) => {
 
 //Takes in the title and the text, and appends the result onto the db.json.
 notes.post("/", (req, res) => {
-    console.log(req.body)
     const {title, text} = req.body;
 
     if(req.body){
+        readFromFile("./db/db.json").then(data => JSON.parse(data))
+        .then(json => {
+        console.log(json)
+        const id = json.length + 1;
         const newNote = {
+            id,
             title,
             text
         }
         readAndAppend(newNote, "./db/db.json");
         res.json("Note posted successfully!")
+
+        })
     }
     else{
         res.error("Oops, something broke! Note not added.")
@@ -28,6 +34,7 @@ notes.post("/", (req, res) => {
 
 //Deletes a chosen note from db.json.
 notes.delete("/:entry", (req, res) => {
+    console.log(req.params)
     //The note that needs to be deleted is what's specified in the parameters, so that's defined.
     const toBeDeleted = req.params.entry;
     //Data is read from db.json, and parsed into a workable format.
@@ -39,7 +46,7 @@ notes.delete("/:entry", (req, res) => {
         //Overwrites db.json with the changed array.
         writeToFile("./db/db.json", result)
 
-        res.json(`Entry number ${noteId} deleted!`)
+        res.json(`Entry deleted!`)
     })
 });
 
