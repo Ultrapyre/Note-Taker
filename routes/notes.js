@@ -15,7 +15,6 @@ notes.post("/", (req, res) => {
     if(req.body){
         readFromFile("./db/db.json").then(data => JSON.parse(data))
         .then(json => {
-        console.log(json)
         const id = json.length + 1;
         const newNote = {
             id,
@@ -33,16 +32,15 @@ notes.post("/", (req, res) => {
 });
 
 //Deletes a chosen note from db.json.
-notes.delete("/:entry", (req, res) => {
-    console.log(req.params)
+notes.delete("/:id", (req, res) => {
     //The note that needs to be deleted is what's specified in the parameters, so that's defined.
-    const toBeDeleted = req.params.entry;
+    const toBeDeleted = req.params.id;
     //Data is read from db.json, and parsed into a workable format.
     readFromFile("./db/db.json")
     .then(data => JSON.parse(data))
     .then(json => {
         //Picks out the note that is to be deleted, then returns the rest.
-        const result = json.filter((note) => note !== toBeDeleted)
+        const result = json.filter((note) => note.id != toBeDeleted)
         //Overwrites db.json with the changed array.
         writeToFile("./db/db.json", result)
 

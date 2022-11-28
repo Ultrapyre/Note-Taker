@@ -5,11 +5,6 @@
         "text": "Test text"
     },
     {
-        "id": 2,
-        "title": "Another note",
-        "text": "Add something here"
-    },
-    {
         "id": 3,
         "title": "Note to delete",
         "text": "Who even reads this?"
@@ -23,11 +18,6 @@
         "id": 5,
         "title": "id'd note",
         "text": "hope this works"
-    },
-    {
-        "id": 6,
-        "title": "Another ID'd note",
-        "text": "Something here."
     },
     {
         "id": 7,
