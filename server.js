@@ -3,8 +3,8 @@ const path = require('path');
 const api = require("./routes/index.js")
 
 const app = express();
-//Temporary port till I learn how to use Hiroku
-const PORT = process.env.PORT || 3001;
+//A specific port for the app to broadcast from.
+const PORT = process.env.PORT || 8000;
 
 //A bunch of app.use functions that allow the website to process API calls.
 app.use(express.json())
@@ -23,5 +23,5 @@ app.get('/notes', (req, res) =>{
 })
 
 app.listen(PORT, () =>
-  console.log(`App open at http://localhost:${PORT}`)
+  console.log(`Now listening.`)
 );
